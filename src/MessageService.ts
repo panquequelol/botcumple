@@ -20,12 +20,11 @@ export class MessageService extends Effect.Service<MessageService>()(
         > =>
           fs.readFileString("messages.json").pipe(
             Effect.flatMap(decode),
-            Effect.catchAll(
-              (error) =>
-                new FileError({
-                  message: "Failed to read or parse messages.json",
-                  cause: error,
-                })
+            Effect.mapError((cause) =>
+              new FileError({
+                message: "Failed to read or parse messages.json",
+                cause,
+              })
             )
           ),
       };

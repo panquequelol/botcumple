@@ -6,7 +6,7 @@ export const MessageSchema = Schema.Struct({
   targets: Schema.Array(Schema.String),
 });
 
-export interface Message extends Schema.Schema.Type<typeof MessageSchema> {}
+export type Message = Schema.Schema.Type<typeof MessageSchema>;
 
 export class ConfigError extends Data.TaggedError("ConfigError")<{
   message: string;

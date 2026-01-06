@@ -14,7 +14,4 @@ const MainLayer = SchedulerLive.pipe(
 
 const program = Layer.launch(MainLayer);
 
-Effect.runPromise(program).catch((err) => {
-  console.error("Fatal error:", err);
-  process.exit(1);
-});
+Effect.runPromise(program);

@@ -14,10 +14,16 @@ export class DiscordService extends Effect.Service<DiscordService>()(
               body: JSON.stringify({ content }),
             });
             if (!response.ok) {
-              throw new Error(`Status ${response.status}`);
+              throw new DiscordError({
+                message: `HTTP ${response.status}`,
+                status: response.status,
+              });
             }
           },
-          catch: (e) => new DiscordError({ message: String(e) }),
+          catch: (e) => {
+            if (e instanceof DiscordError) return e;
+            return new DiscordError({ message: String(e) });
+          },
         });
 
         const policy = Schedule.exponential("1 seconds", 2.0).pipe(
@@ -40,7 +46,9 @@ export class DiscordService extends Effect.Service<DiscordService>()(
     this,
     this.of({
       sendMessage: (url: string, content: string) =>
-        Console.log(`[DiscordService][TEST] Sending to ${url}: "${content}"`),
-    } as any)
+        Console.log(`[DiscordService][TEST] Sending to ${url}: "${content}"`).pipe(
+          Effect.asVoid
+        ),
+    })
   );
 }
