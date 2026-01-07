@@ -2,6 +2,7 @@ import { Data, Schema } from "effect";
 
 export const MessageSchema = Schema.Struct({
   date: Schema.String,
+  type: Schema.Union(Schema.Literal("holiday"), Schema.Literal("birthday")),
   content: Schema.String,
   targets: Schema.Array(Schema.String),
 });
