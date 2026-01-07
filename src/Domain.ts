@@ -8,10 +8,6 @@ export const MessageSchema = Schema.Struct({
 
 export type Message = Schema.Schema.Type<typeof MessageSchema>;
 
-export class ConfigError extends Data.TaggedError("ConfigError")<{
-  message: string;
-}> {}
-
 export class FileError extends Data.TaggedError("FileError")<{
   message: string;
   cause?: unknown;

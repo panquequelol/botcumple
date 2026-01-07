@@ -1,4 +1,5 @@
-import { Effect, Schedule, Console, Layer } from "effect";
+import { Effect, Schedule, Console } from "effect";
+import { HttpClient } from "@effect/platform";
 import { DiscordError } from "./Domain";
 
 export class DiscordService extends Effect.Service<DiscordService>()(
@@ -6,31 +7,24 @@ export class DiscordService extends Effect.Service<DiscordService>()(
   {
     succeed: {
       sendMessage: (url: string, content: string) => {
-        const perform = Effect.tryPromise({
-          try: async () => {
-            const response = await fetch(url, {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ content }),
-            });
-            if (!response.ok) {
-              throw new DiscordError({
-                message: `HTTP ${response.status}`,
-                status: response.status,
-              });
-            }
-          },
-          catch: (e) => {
-            if (e instanceof DiscordError) return e;
-            return new DiscordError({ message: String(e) });
-          },
+        const request = HttpClient.post(url, {
+          body: HttpClient.bodyJson({ content }),
         });
 
         const policy = Schedule.exponential("1 seconds", 2.0).pipe(
           Schedule.intersect(Schedule.recurs(5))
         );
 
-        return perform.pipe(
+        return request.pipe(
+          Effect.flatMap(HttpClient.response),
+          Effect.filterSuccess({
+            ifLeft: (res) =>
+              new DiscordError({
+                message: `HTTP ${res.status}`,
+                status: res.status,
+              }),
+          }),
+          Effect.asVoid,
           Effect.tapError((e) =>
             Console.error(
               `[DiscordService] Error sending to ${url}: ${e.message}. Retrying...`
@@ -41,14 +35,4 @@ export class DiscordService extends Effect.Service<DiscordService>()(
       },
     },
   }
-) {
-  static readonly Test = Layer.succeed(
-    this,
-    this.of({
-      sendMessage: (url: string, content: string) =>
-        Console.log(`[DiscordService][TEST] Sending to ${url}: "${content}"`).pipe(
-          Effect.asVoid
-        ),
-    })
-  );
-}
+) {}
