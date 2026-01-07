@@ -2,7 +2,7 @@ import { Effect, Schedule, Console, Ref, Layer, Match, Config } from "effect";
 import { MessageService } from "./MessageService";
 import { DiscordService } from "./DiscordService";
 
-export const SchedulerLive = Layer.launch(
+export const SchedulerLive = Layer.fromEffectDiscard(
   Effect.gen(function* () {
     const messages = yield* MessageService;
     const discord = yield* DiscordService;
