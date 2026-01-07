@@ -1,6 +1,6 @@
 import { Effect, Schema } from "effect";
 import { FileSystem } from "@effect/platform";
-import { FileError, MessageSchema, type Message } from "./Domain";
+import { FileError, MessageSchema } from "./Domain";
 
 export class MessageService extends Effect.Service<MessageService>()(
   "MessageService",
@@ -13,11 +13,7 @@ export class MessageService extends Effect.Service<MessageService>()(
       );
 
       return {
-        getMessages: (): Effect.Effect<
-          ReadonlyArray<Message>,
-          FileError,
-          FileSystem.FileSystem
-        > =>
+        getMessages: () =>
           fs.readFileString("messages.json").pipe(
             Effect.flatMap(decode),
             Effect.mapError((cause) =>
