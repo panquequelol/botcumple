@@ -132,6 +132,12 @@
     "targets": ["GUEVONCITOS"]
   },
   {
+    "date": "2026-07-10",
+    "type": "birthday",
+    "content": "rené",
+    "targets": ["GUEVONCITOS"]
+  },
+  {
     "date": "2026-06-20",
     "type": "birthday",
     "content": "claudio",
