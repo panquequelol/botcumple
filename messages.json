@@ -1,82 +1,170 @@
 [
   {
     "date": "2026-01-01",
-    "content": "feriado. año nuevo culiaos, a curarse",
+    "type": "holiday",
+    "content": "año nuevo culiaos, a curarse",
     "targets": ["GUEVONCITOS"]
   },
   {
     "date": "2026-04-03",
-    "content": "feriado. viernes santo, a puro comer pescao",
+    "type": "holiday",
+    "content": "viernes santo, a puro comer pescao",
     "targets": ["GUEVONCITOS"]
   },
   {
     "date": "2026-04-04",
-    "content": "feriado. sábado santo, queda pescao?",
+    "type": "holiday",
+    "content": "sábado santo, queda pescao?",
     "targets": ["GUEVONCITOS"]
   },
   {
     "date": "2026-05-01",
-    "content": "feriado. día del trabajador pero nadie trabaja wn",
+    "type": "holiday",
+    "content": "día del trabajador pero nadie trabaja wn",
     "targets": ["GUEVONCITOS"]
   },
   {
     "date": "2026-05-21",
-    "content": "feriado. 21 de mayo, puro discurso",
+    "type": "holiday",
+    "content": "21 de mayo, puro discurso",
     "targets": ["GUEVONCITOS"]
   },
   {
     "date": "2026-06-21",
-    "content": "feriado. de pueblos indígenas, san pedro adelantado",
+    "type": "holiday",
+    "content": "de pueblos indígenas, san pedro adelantado",
     "targets": ["GUEVONCITOS"]
   },
   {
     "date": "2026-06-29",
-    "content": "feriado. san pedro reconchetumare",
+    "type": "holiday",
+    "content": "san pedro reconchetumare",
     "targets": ["GUEVONCITOS"]
   },
   {
     "date": "2026-07-16",
-    "content": "feriado. virgen del carmen, feriado cuico",
+    "type": "holiday",
+    "content": "virgen del carmen, feriado cuico",
     "targets": ["GUEVONCITOS"]
   },
   {
     "date": "2026-08-15",
-    "content": "feriado. asunción, nadie cacha qué wea es",
+    "type": "holiday",
+    "content": "asunción, nadie cacha qué wea es",
     "targets": ["GUEVONCITOS"]
   },
   {
     "date": "2026-09-18",
-    "content": "feriado. se viene el 18 conchesumadre",
+    "type": "holiday",
+    "content": "se viene el 18 conchesumadre",
     "targets": ["GUEVONCITOS"]
   },
   {
     "date": "2026-09-19",
-    "content": "feriado. sigue el 18, la wea obvia",
+    "type": "holiday",
+    "content": "sigue el 18, la wea obvia",
     "targets": ["GUEVONCITOS"]
   },
   {
     "date": "2026-10-12",
-    "content": "feriado. del 12, nadie lo pesca",
+    "type": "holiday",
+    "content": "del 12, nadie lo pesca",
     "targets": ["GUEVONCITOS"]
   },
   {
     "date": "2026-10-31",
-    "content": "feriado. halloween qliao, a disfrazarse",
+    "type": "holiday",
+    "content": "halloween qliao, a disfrazarse",
     "targets": ["GUEVONCITOS"]
   },
   {
     "date": "2026-11-01",
-    "content": "feriado. todos los santos, visita al cementerio",
+    "type": "holiday",
+    "content": "todos los santos, visita al cementerio",
     "targets": ["GUEVONCITOS"]
   },
   {
     "date": "2026-12-08",
-    "content": "feriado. inmaculada concepción, arranque navideño",
+    "type": "holiday",
+    "content": "inmaculada concepción, arranque navideño",
     "targets": ["GUEVONCITOS"]
   },
   {
     "date": "2026-12-25",
-    "content": "feriado. navidad, viejito pascuero y todo",
+    "type": "holiday",
+    "content": "navidad, viejito pascuero y todo",
+    "targets": ["GUEVONCITOS"]
+  },
+  {
+    "date": "2026-01-04",
+    "type": "birthday",
+    "content": "nashe",
+    "targets": ["GUEVONCITOS"]
+  },
+  {
+    "date": "2026-02-26",
+    "type": "birthday",
+    "content": "huaso",
+    "targets": ["GUEVONCITOS"]
+  },
+  {
+    "date": "2026-03-07",
+    "type": "birthday",
+    "content": "pancho",
+    "targets": ["GUEVONCITOS"]
+  },
+  {
+    "date": "2026-04-11",
+    "type": "birthday",
+    "content": "agus",
+    "targets": ["GUEVONCITOS"]
+  },
+  {
+    "date": "2026-06-15",
+    "type": "birthday",
+    "content": "nikko",
+    "targets": ["GUEVONCITOS"]
+  },
+  {
+    "date": "2026-06-19",
+    "type": "birthday",
+    "content": "ghox",
+    "targets": ["GUEVONCITOS"]
+  },
+  {
+    "date": "2026-06-20",
+    "type": "birthday",
+    "content": "claudio",
+    "targets": ["GUEVONCITOS"]
+  },
+  {
+    "date": "2026-06-27",
+    "type": "birthday",
+    "content": "lin",
+    "targets": ["GUEVONCITOS"]
+  },
+  {
+    "date": "2026-08-15",
+    "type": "birthday",
+    "content": "pepe",
+    "targets": ["GUEVONCITOS"]
+  },
+  {
+    "date": "2026-09-20",
+    "type": "birthday",
+    "content": "alonso",
+    "targets": ["GUEVONCITOS"]
+  },
+  {
+    "date": "2026-12-02",
+    "type": "birthday",
+    "content": "gabo",
+    "targets": ["GUEVONCITOS"]
+  },
+  {
+    "date": "2026-12-28",
+    "type": "birthday",
+    "content": "locomotivo",
     "targets": ["GUEVONCITOS"]
   }
 ]
