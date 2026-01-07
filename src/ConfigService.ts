@@ -14,19 +14,11 @@ export class ConfigService extends Effect.Service<ConfigService>()(
               : Effect.fail(
                   new ConfigError({
                     message: `Missing environment variable: ${envKey}`,
-                  })
-                )
-          )
+                  }),
+                ),
+          ),
         );
       },
     },
-  }
-) {
-  static readonly Test = Layer.succeed(
-    this,
-    this.of({
-      getWebhookUrl: (id: string) =>
-        Effect.succeed(`http://dummy-webhook.com/${id}`),
-    })
-  );
-}
+  },
+) {}

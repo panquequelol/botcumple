@@ -1,46 +1,57 @@
-import { Effect, Schedule, Console, Layer } from "effect";
+import { Effect, Schedule, Console } from "effect";
+import { HttpClient, HttpClientRequest, HttpBody } from "@effect/platform";
 import { DiscordError } from "./Domain";
 
 export class DiscordService extends Effect.Service<DiscordService>()(
   "DiscordService",
   {
     succeed: {
-      sendMessage: (url: string, content: string) => {
-        const perform = Effect.tryPromise({
-          try: async () => {
-            const response = await fetch(url, {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ content }),
-            });
-            if (!response.ok) {
-              throw new Error(`Status ${response.status}`);
-            }
-          },
-          catch: (e) => new DiscordError({ message: String(e) }),
-        });
-
-        const policy = Schedule.exponential("1 seconds", 2.0).pipe(
-          Schedule.intersect(Schedule.recurs(5))
-        );
-
-        return perform.pipe(
-          Effect.tapError((e) =>
-            Console.error(
-              `[DiscordService] Error sending to ${url}: ${e.message}. Retrying...`
-            )
-          ),
-          Effect.retry(policy)
-        );
-      },
-    },
-  }
-) {
-  static readonly Test = Layer.succeed(
-    this,
-    this.of({
       sendMessage: (url: string, content: string) =>
-        Console.log(`[DiscordService][TEST] Sending to ${url}: "${content}"`),
-    } as any)
-  );
-}
+        Effect.gen(function* () {
+          const perform = Effect.gen(function* () {
+            const body = yield* HttpBody.json({ content });
+
+            return yield* HttpClientRequest.post(url, {
+              body,
+            }).pipe(
+              HttpClient.execute,
+              Effect.flatMap((response) =>
+                response.status === 204
+                  ? Effect.void
+                  : Effect.fail(
+                      new DiscordError({
+                        message: `Unexpected status: ${response.status}`,
+                      }),
+                    ),
+              ),
+              Effect.catchAll((error) =>
+                Effect.fail(
+                  new DiscordError({
+                    message:
+                      typeof error === "object" &&
+                      error !== null &&
+                      "message" in error
+                        ? String(error.message)
+                        : String(error),
+                  }),
+                ),
+              ),
+            );
+          });
+
+          const policy = Schedule.exponential("1 seconds", 2.0).pipe(
+            Schedule.intersect(Schedule.recurs(5)),
+          );
+
+          return yield* perform.pipe(
+            Effect.tapError((e) =>
+              Console.error(
+                `[DiscordService] Error sending to ${url}: ${e._tag === "DiscordError" ? e.message : String(e)}. Retrying...`,
+              ),
+            ),
+            Effect.retry(policy),
+          );
+        }),
+    },
+  },
+) {}
